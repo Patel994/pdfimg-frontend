@@ -19,6 +19,18 @@
     <button onclick="uploadPDF()">Convert to Images</button>
     <p id="status"></p>
   </div>
+  <div
+    <select id="format">
+  <option value="image">JPG</option>
+  <option value="png">PNG</option>
+  <option value="docx">DOCX</option>
+  <option value="txt">TXT</option>
+</select>
+     </div>
+  <input type="file" id="pdfInput" />
+  
+<button onclick="uploadPDF()">Convert</button>
+
 
   <script>
     const dropArea = document.getElementById("dropArea");
