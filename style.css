@@ -1,36 +1,69 @@
-
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f4f7fa;
-  color: #333;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   text-align: center;
-  padding: 50px;
+  width: 90%;
+  max-width: 500px;
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 30px;
-  color: #2b5876;
+  margin-bottom: 10px;
+  font-size: 28px;
+  color: #333;
 }
 
-input[type="file"] {
-  margin: 20px 0;
-  padding: 10px;
-  border-radius: 8px;
+.subheading {
+  margin-bottom: 30px;
+  color: #666;
+  font-size: 14px;
+}
+
+.upload-box {
   border: 2px dashed #ccc;
-  background: white;
-  width: 300px;
-  max-width: 80%;
+  border-radius: 12px;
+  padding: 40px 20px;
+  background: #fafafa;
+  margin-bottom: 20px;
   cursor: pointer;
+  transition: border 0.3s ease;
+}
+
+.upload-box:hover,
+.upload-box.dragover {
+  border-color: #4facfe;
+  background: #f0faff;
+}
+
+.upload-box input[type="file"] {
+  display: none;
+}
+
+.upload-box p {
+  margin: 0;
+  font-size: 14px;
+  color: #888;
 }
 
 button {
-  padding: 12px 30px;
-  background: linear-gradient(to right, #4facfe, #00f2fe);
+  padding: 12px 24px;
   border: none;
-  border-radius: 25px;
+  border-radius: 30px;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
   color: white;
-  font-size: 1rem;
+  font-size: 16px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
@@ -41,5 +74,6 @@ button:hover {
 
 #status {
   margin-top: 20px;
-  font-weight: bold;
+  color: #333;
+  font-weight: 500;
 }
