@@ -1,100 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PDF to Image Converter</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="container">
-    <h1>PDF to Image Converter</h1>
-    <p class="subheading">Convert your PDFs into high-quality images in seconds.</p>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
 
-    <div class="upload-box" id="dropArea">
-      <input type="file" id="pdfInput" accept=".pdf" />
-      <p>Click or drag your PDF file here</p>
-    </div>
+.container {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+}
 
-    <button onclick="uploadPDF()">Convert to Images</button>
-    <p id="status"></p>
-  </div>
-  <div
-    <select id="format">
-  <option value="image">JPG</option>
-  <option value="png">PNG</option>
-  <option value="docx">DOCX</option>
-  <option value="txt">TXT</option>
-</select>
-     </div>
-  <input type="file" id="pdfInput" />
-  
-<button onclick="uploadPDF()">Convert</button>
+h1 {
+  margin-bottom: 10px;
+  font-size: 28px;
+  color: #333;
+}
 
+.subheading {
+  margin-bottom: 30px;
+  color: #666;
+  font-size: 14px;
+}
 
-  <script>
-    const dropArea = document.getElementById("dropArea");
-    const pdfInput = document.getElementById("pdfInput");
+.upload-box {
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  padding: 40px 20px;
+  background: #fafafa;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: border 0.3s ease;
+}
 
-    // Drag and drop behavior
-    dropArea.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      dropArea.classList.add("dragover");
-    });
+.upload-box:hover,
+.upload-box.dragover {
+  border-color: #4facfe;
+  background: #f0faff;
+}
 
-    dropArea.addEventListener("dragleave", () => {
-      dropArea.classList.remove("dragover");
-    });
+.upload-box input[type="file"] {
+  display: none;
+}
 
-    dropArea.addEventListener("drop", (e) => {
-      e.preventDefault();
-      dropArea.classList.remove("dragover");
-      const files = e.dataTransfer.files;
-      if (files.length > 0) {
-        pdfInput.files = files;
-      }
-    });
+.upload-box p {
+  margin: 0;
+  font-size: 14px;
+  color: #888;
+}
 
-    async function uploadPDF() {
-      const file = pdfInput.files[0];
-      const status = document.getElementById('status');
+button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
 
-      if (!file) {
-        status.textContent = "Please select a PDF file.";
-        return;
-      }
+button:hover {
+  background: linear-gradient(to right, #43e97b, #38f9d7);
+}
 
-      const formData = new FormData();
-      formData.append('file', file);
+#status {
+  margin-top: 20px;
+  color: #333;
+  font-weight: 500;
+}
 
-      status.textContent = "Uploading and converting...";
-
-      try {
-        const response = await fetch('https://pdf2img-backend-5.onrender.com/upload', {
-          method: 'POST',
-          body: formData
-        });
-
-        if (!response.ok) {
-          throw new Error("Upload failed");
-        }
-
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'images.zip';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        window.URL.revokeObjectURL(url);
-
-        status.textContent = "Download started!";
-      } catch (err) {
-        status.textContent = "Error uploading file.";
-        console.error(err);
-      }
-    }
-  </script>
-</body>
-</html>
